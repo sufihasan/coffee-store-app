@@ -3,9 +3,9 @@ import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
 
 const UpdateCoffee = () => {
-    const {_id, name, quantity, price, taste, supplier, photo, details} = useLoaderData();
+    const { _id, name, quantity, price, taste, supplier, photo, details } = useLoaderData();
 
-    const handleUpdateCoffee = e =>{
+    const handleUpdateCoffee = e => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
@@ -13,25 +13,25 @@ const UpdateCoffee = () => {
         console.log(updatedCoffee);
 
         // send updated coffee to the db
-        fetch(`http://localhost:3000/coffees/${_id}`, {
-            method: 'PUT', 
+        fetch(`https://coffee-store-server-b11.vercel.app/coffees/${_id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
-            }, 
+            },
             body: JSON.stringify(updatedCoffee)
         })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.modifiedCount){
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Coffee updated successfully.",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Coffee updated successfully.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
 
     }
 

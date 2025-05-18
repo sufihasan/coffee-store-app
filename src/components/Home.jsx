@@ -10,10 +10,10 @@ const Home = () => {
         <div>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 {
-                    coffees.map(coffee => <CoffeeCard 
-                        key={coffee._id} 
-                        coffees = {coffees}
-                        setCoffees = {setCoffees}
+                    coffees.map(coffee => <CoffeeCard
+                        key={coffee._id}
+                        coffees={coffees}
+                        setCoffees={setCoffees}
                         coffee={coffee}></CoffeeCard>)
                 }
             </div>

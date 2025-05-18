@@ -11,22 +11,33 @@ const SignUp = () => {
         const form = e.target;
 
         const formData = new FormData(form);
-        const { email, password, ...userProfile } = Object.fromEntries(formData.entries());
+        const { email, password, ...restFormData } = Object.fromEntries(formData.entries());
+
+
 
         // const email = formData.get('email');
         // const password = formData.get('password');
 
-        console.log(email, password, userProfile);
+        console.log(email, password, restFormData);
 
         //create user in the firebase
 
         createUser(email, password)
             .then(result => {
 
+                const userProfile = {
+                    email,
+                    ...restFormData,
+                    creationTime: result.user?.metadata?.creationTime,
+                    lastSignInTime: result.user?.metadata?.lastSignInTime
+
+                }
+
+
                 console.log(result.user);
 
                 //save profile info in the database
-                fetch('http://localhost:3000/users', {
+                fetch('https://coffee-store-server-b11.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
